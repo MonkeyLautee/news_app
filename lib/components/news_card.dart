@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../services/helper.dart';
 
 class NewsCard extends StatelessWidget {
 	final String image;
@@ -22,7 +21,7 @@ class NewsCard extends StatelessWidget {
 				  	children: [
 				  		Expanded(
 				  			child: ClipRRect(
-								  borderRadius: BorderRadius.vertical(
+								  borderRadius: const BorderRadius.vertical(
 								    top: Radius.circular(23.0),
 								    bottom: Radius.zero,
 								  ),
@@ -77,7 +76,7 @@ class NewsCard extends StatelessWidget {
 	      bottom: 0,
 	      right: 0,
 	      child: Transform.translate(
-	      	offset: Offset(10,10),
+	      	offset: const Offset(10,10),
 	      	child: Container(
   	        width: 72,
   	        height: 72,
@@ -91,7 +90,7 @@ class NewsCard extends StatelessWidget {
   				  ),
   				  child: Center(
   				  	child: IconButton(
-  				  		onPressed: (){},//TODO
+  				  		onPressed: (){},
   				  		icon: Icon(bookmarked?Icons.bookmark:Icons.bookmark_border,color:Colors.white),
   				  	)
   				  ),

@@ -5,14 +5,14 @@ class MyAppBar extends StatelessWidget {
   const MyAppBar({this.title='News app',Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context)=>AppBar(
-    title: Text(title,style:TextStyle(fontFamily:'Serif',fontWeight:FontWeight.bold)),
-    actions: [
+    title: Text(title,style:const TextStyle(fontFamily:'Serif',fontWeight:FontWeight.bold)),
+    actions: const [
       Row(
         children: [
           Icon(Icons.person,color:Colors.black),
-          const SizedBox(width:7),
+          SizedBox(width:7),
           Text('My account',style:TextStyle(fontWeight:FontWeight.bold)),
-          const SizedBox(width:7),
+          SizedBox(width:7),
         ],
       ),
     ],

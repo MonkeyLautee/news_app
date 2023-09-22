@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../components/my_app_bar.dart';
-import '../components/my_button.dart';
 
 class SelectCategory extends StatefulWidget {
   const SelectCategory({Key? key}) : super(key: key);
@@ -10,7 +9,7 @@ class SelectCategory extends StatefulWidget {
 
 class _SelectCategoryState extends State<SelectCategory> {
 
-	List<Map<String,dynamic>> _categories=[
+	final List<Map<String,dynamic>> _categories=[
 		{'name': 'Category 1','selected': true},
 		{'name': 'Category 2','selected': false},
 		{'name': 'Category 3','selected': false},
@@ -23,7 +22,7 @@ class _SelectCategoryState extends State<SelectCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
     	backgroundColor: Theme.of(context).colorScheme.background,
-    	appBar: PreferredSize(
+    	appBar: const PreferredSize(
         preferredSize: Size.fromHeight(55),
         child: MyAppBar(title:'Select categories'),
       ),
@@ -44,7 +43,17 @@ class _SelectCategoryState extends State<SelectCategory> {
         		)).toList(),
         	),
         	const SizedBox(height:12),
-        	MyButton('Aplicar filtros',()=>Navigator.pop(context)),
+					ElevatedButton(
+						onPressed: ()=>Navigator.pop(context),
+						style: ElevatedButton.styleFrom(
+							backgroundColor: Colors.black,
+							foregroundColor: Colors.white,
+							shape: RoundedRectangleBorder(
+								borderRadius: BorderRadius.circular(16.0),
+							),
+						),
+						child:const Text('Aplicar filtros'),
+					),
         ],
       ),
     );

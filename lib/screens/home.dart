@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   bool _loading = true;
   List _news = [];
   String _location = 'New York';
-  List<String> _locations = ['New York','Washington'];
   String _weather = 'Cloudy';
 
   @override
@@ -73,7 +72,6 @@ class _HomeState extends State<Home> {
     return okButtonPressed?stringController.text.trim():null;
   }
 
-  bool _loadingWeather = false;
   void _changeLocation()async{
     String? newLocation = await getText(context);
     if(newLocation==null)return;
@@ -89,7 +87,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size.fromHeight(55),
         child: MyAppBar(),
       ),
@@ -111,26 +109,26 @@ class _HomeState extends State<Home> {
                   Text('Weather: $_weather',style:Theme.of(context).textTheme.bodyMedium),
                   const SizedBox(height:7),
                   ElevatedButton(
-                    child: Text('Check weather'),
                     onPressed: _checkWeather,
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      onPrimary: Colors.white,
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.black,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                     ),
+                    child: const Text('Check weather'),
                   ),
                   ElevatedButton(
-                    child: Text('Change location'),
                     onPressed:_changeLocation,
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      onPrimary: Colors.white,
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                     ),
+                    child: const Text('Change location'),
                   ),
                   const SizedBox(height:12),
                 ],
@@ -142,8 +140,8 @@ class _HomeState extends State<Home> {
             children: [
               Text('Categories',style:Theme.of(context).textTheme.headlineSmall),
               InkWell(
-                onTap:()=>Navigator.push(context,MaterialPageRoute(builder:(x)=>SelectCategory())),
-                child: Text('View all',style:TextStyle(decoration:TextDecoration.underline)),
+                onTap:()=>Navigator.push(context,MaterialPageRoute(builder:(x)=>const SelectCategory())),
+                child: const Text('View all',style:TextStyle(decoration:TextDecoration.underline)),
               ),
             ],
           ),
@@ -153,7 +151,7 @@ class _HomeState extends State<Home> {
             height: 55,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
+              children: const [
                 CategoryChip('Category 1',true),
                 CategoryChip('Category 3',false),
                 CategoryChip('Category 4',true),
@@ -166,7 +164,7 @@ class _HomeState extends State<Home> {
           const SizedBox(height:13),
           Text('Latest news',style:Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height:13),
-          _loading?Center(child:CircularProgressIndicator(color:Colors.black)):Wrap(
+          _loading?const Center(child:CircularProgressIndicator(color:Colors.black)):Wrap(
             runSpacing: 16,
             children: _news.map((theNew)=>NewsCard(
               image: theNew['urlToImage']??'',
@@ -177,7 +175,6 @@ class _HomeState extends State<Home> {
           ),
           const SizedBox(height:13),
           ElevatedButton(
-            child: Text('Refresh'),
             onPressed: ()async{
               setState(()=>_loading=true);
               List? latestNews = await APICalls.getNews();
@@ -187,12 +184,13 @@ class _HomeState extends State<Home> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Colors.black,
-              onPrimary: Colors.white,
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
             ),
+            child:const Text('Refresh'),
           ),
         ],
       ),
@@ -209,7 +207,7 @@ class CategoryChip extends StatelessWidget {
     padding: const EdgeInsets.only(right:10),
     child: Chip(
       backgroundColor: selected?Colors.black:Colors.grey,
-      label: Text(category,style:TextStyle(color:Colors.white)),
+      label: Text(category,style:const TextStyle(color:Colors.white)),
     ),
   );
 }
